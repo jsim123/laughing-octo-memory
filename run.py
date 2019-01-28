@@ -1,5 +1,9 @@
-from routes import app
+from app import app
+from flask_socketio import SocketIO
+socketio = SocketIO(app)
+
+import routes
 
 if __name__ == '__main__':
 
-	app.run(debug=True, port = 8088)
+	socketio.run(app,port=3000)
