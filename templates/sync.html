@@ -5,6 +5,12 @@
 	
 		<h1 id= "Title">Youtube Syncer</h1>
 	</head>
+	<form method="post">
+	
+		<p>Youtube Link
+		<br><input type=text name=seachedLink placeholder="Link">
+		<p><button type="submit">Submit</button>
+	</form>
 	
 <!DOCTYPE html>
 <html>
@@ -73,8 +79,7 @@
 		if (player.getPlayerState()== 2) {
 			socket.emit('pause', {data: 'paused'});
         }
-		<!-- This makes it so it allows users to seek ahead or behind as videos , The done variable is to make sure it doesn't loop at the start 
-			as the api considers starting the video as buffering-->
+		<!-- This makes it so it allows users to seek ahead or behind as videos , The done variable is to make sure it doesn't loop at the start as the api considers starting the video as buffering-->
 		if (player.getPlayerState()== 3&&player.getPlayerState()!= -1 && done==true) {
 			console.log("Initial buffer" + player.getCurrentTime())
 			socket.emit('buffering', {data: player.getCurrentTime()});

@@ -5,6 +5,11 @@ from search import Searcher
 searcher = Searcher()
 @app.route('/', methods=['POST', 'GET'])
 def video():
+    if request.method == 'POST':
+        SearchedLink = request.form['seachedLink']
+        print("UHFDSHDFHHKFDSKJFDSNHKDFJHK")
+        searcher.add_link(SearchedLink)
+        return render_template('sync.html',videoLink = SearchedLink)
     vid = searcher.get_link()
     return render_template('sync.html',videoLink = vid)
 
