@@ -1,10 +1,12 @@
 from flask  import Flask, render_template,request,redirect,url_for
 from app import app
+from search import Searcher
 
+searcher = Searcher()
 @app.route('/', methods=['POST', 'GET'])
 def video():
-
-    return render_template('sync.html')
+    vid = searcher.get_link()
+    return render_template('sync.html',videoLink = vid)
 
 
 
@@ -12,6 +14,8 @@ def video():
 def home():
     if request.method == 'POST':
         url = request.form["phone"]
-        print("DFhsfddfshdfshkdsjfdjksdjfdsj"+ url)
-        return redirect(url_for('video'))
+        if(url!=''):
+            print("DFhsfddfshdfshkdsjfdjksdjfdsj"+ url)
+            searcher.add_link(url)
+            return redirect(url_for('video'))
     return render_template('home.html')
